@@ -28,23 +28,24 @@ jobs:
           plugin_languages_recent_days: 14    # ดูกิจกรรม 14 วันหลังสุด (ถ้าใช้โหมด recent)
           plugin_languages_sections: "most-used, recently-used"
 
-  pagespeed:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: PageSpeed Insights
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          filename: metrics.pagespeed.svg
-          plugin_pagespeed: yes
-          plugin_pagespeed_url: https://9zahub.com
-          plugin_pagespeed_detailed: yes       # รายงานละเอียด (Lighthouse/CrUX)
-          plugin_pagespeed_pwa: yes            # สถานะ PWA
-          plugin_pagespeed_screenshot: yes     # สกรีนช็อตหน้าเว็บ
-          config_timezone: Asia/Bangkok
+pagespeed:
+  runs-on: ubuntu-latest
+  permissions:
+    contents: write
+  steps:
+    - name: PageSpeed Insights
+      uses: lowlighter/metrics@latest
+      with:
+        token: ${{ secrets.METRICS_TOKEN }}
+        base: ""
+        filename: metrics.pagespeed.svg
+        plugin_pagespeed: yes
+        plugin_pagespeed_url: https://9zahub.com
+        plugin_pagespeed_token: ${{ secrets.METRICS_PAGESPEED_TOKEN }}  # << ใส่คีย์ที่สร้างไว้
+        plugin_pagespeed_detailed: yes
+        plugin_pagespeed_pwa: yes
+        plugin_pagespeed_screenshot: yes
+        config_timezone: Asia/Bangkok
 
   fortune:
     runs-on: ubuntu-latest
