@@ -1,7 +1,7 @@
 name: GitHub Metrics
 
 on:
-  # รันอัตโนมัติทุกวัน 07:00 ตามเวลาไทย
+  # รันอัตโนมัติทุกวัน 07:00 เวลาไทย (00:00 UTC)
   schedule: [{ cron: "0 0 * * *" }]
   # กดรันเองได้จากแท็บ Actions
   workflow_dispatch:
@@ -26,10 +26,12 @@ jobs:
           plugin_languages_limit: 12          # แสดงสูงสุดกี่ภาษา
           plugin_languages_threshold: 2%      # ตัดภาษาน้อยกว่า x% ออก
           plugin_languages_recent_days: 14    # ดูกิจกรรม 14 วันหลังสุด (ถ้าใช้โหมด recent)
-          plugin_languages_sections: most-used, recently-used
+          plugin_languages_sections: "most-used, recently-used"
+
   pagespeed:
     runs-on: ubuntu-latest
-    permissions: { contents: write }
+    permissions:
+      contents: write
     steps:
       - name: PageSpeed Insights
         uses: lowlighter/metrics@latest
@@ -39,18 +41,15 @@ jobs:
           filename: metrics.pagespeed.svg
           plugin_pagespeed: yes
           plugin_pagespeed_url: https://9zahub.com
-          plugin_pagespeed_detailed: yes       # โชว์รายงานละเอียด (Lighthouse/CrUX)
-          plugin_pagespeed_pwa: yes            # โชว์สถานะ PWA
-          plugin_pagespeed_screenshot: yes     # แถมภาพสกรีนเพจ
+          plugin_pagespeed_detailed: yes       # รายงานละเอียด (Lighthouse/CrUX)
+          plugin_pagespeed_pwa: yes            # สถานะ PWA
+          plugin_pagespeed_screenshot: yes     # สกรีนช็อตหน้าเว็บ
           config_timezone: Asia/Bangkok
-
-
-
-
 
   fortune:
     runs-on: ubuntu-latest
-    permissions: { contents: write }
+    permissions:
+      contents: write
     steps:
       - name: Fortune cookie
         uses: lowlighter/metrics@latest
