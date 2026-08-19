@@ -3,7 +3,7 @@ name: GitHub Metrics
 on:
   # รันอัตโนมัติทุกวัน 07:00 เวลาไทย (00:00 UTC)
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 22 * * *"
   # กดรันเองได้จากแท็บ Actions
   workflow_dispatch:
 
@@ -44,7 +44,7 @@ jobs:
           plugin_pagespeed: yes
           plugin_pagespeed_url: https://9zahub.com
           plugin_pagespeed_token: ${{ secrets.METRICS_PAGESPEED_TOKEN }}
-          plugin_pagespeed_strategy: mobile     # ระบุให้ชัด (mobile หรือ desktop)
+          plugin_pagespeed_strategy: desktop     # ระบุให้ชัด (mobile หรือ desktop)
           config_timezone: Asia/Bangkok
           config_debug: yes                     # เปิด log เพิ่ม
 
